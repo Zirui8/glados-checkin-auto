@@ -14,7 +14,7 @@ GLaDOS（glados.cloud / glados.rocks / glados.network）每日自动签到脚本
 GLaDOS 签到脚本使用 **Cookie** 进行登录。Cookie 和 网址Api 可能需要定期更新，否则可能会签到失败。  
 
 更新方法：  
-1. 登录 [GLaDOS 官网](https://glados.rocks/)，进入[签到面板](https://glados.network/console/checkin) 
+1. 登录 [GLaDOS 官网](https://glados.cloud/)，进入[签到面板](https://glados.cloud/console/checkin) 
 2. 按 `F12` 打开浏览器开发者工具 → 切到 **网络(Network)**
 3. 刷新一下网页或点击一次“签到”按钮，浏览器开发者工具**Name**(名称)中会出现`checkin`字样，点击`checkin`
 4. 在 **Headers** 中下滑找到 **Cookies** ，找到以下字段并完整复制：
