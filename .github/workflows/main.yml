@@ -1,14 +1,14 @@
-name: GLaDOS Checkin
+name: GLaDOS Daily Checkin
 
 on:
   schedule:
-    # 例子：每天 08:05 中国时间 (UTC+8) 运行
-    - cron: '30 16 * * *'
-  workflow_dispatch:  # 手动触发
+    - cron: '30 16 * * *'          # 每天 UTC 16:30（北京时间 0:30）
+  workflow_dispatch:             # 支持手动触发
 
 jobs:
   checkin:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -16,14 +16,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install requests
 
       - name: Run checkin script
         env:
-          KOA_SESS: ${{ secrets.KOA_SESS }}
-          KOA_SESS_SIG: ${{ secrets.KOA_SESS_SIG }}
-          UA: ${{ secrets.UA }}
+          GLADOS: ${{ secrets.GLADOS }}
         run: python checkin.py
