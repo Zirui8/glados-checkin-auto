@@ -3,7 +3,7 @@
 ## 使用说明
 
 ### 1. 更新 Cookie
-GLaDOS 签到脚本使用 **Cookie** 进行登录。Cookie 可能需要定期更新，否则会签到失败。  
+GLaDOS 签到脚本使用 **Cookie** 进行登录。Cookie 和 网址Api 可能需要定期更新，否则可能会签到失败。  
 
 更新方法：  
 1. 登录 [GLaDOS 官网](https://glados.rocks/)，进入[签到面板](https://glados.network/console/checkin) 
@@ -12,13 +12,24 @@ GLaDOS 签到脚本使用 **Cookie** 进行登录。Cookie 可能需要定期更
 4. 在 **Cookies** 中找到以下字段：
    - `koa:sess`
    - `koa:sess.sig`
-   - `user-agent`（UA，可在 Network 请求头中找到）
-5. 回到 GitHub 仓库 → `Settings` → `Secrets and variables` → `Actions`  
-6. 点击 **Edit**，分别更新以下 Secrets：
-   - `KOA_SESS` → 对应 `koa:sess`
-   - `KOA_SESS_SIG` → 对应 `koa:sess.sig`
-   - `UA` → 对应你的浏览器 UA
-7. 保存即可，GitHub Actions 会在下次运行时使用新的 Cookie。
+
+---
+
+**多账号**：每个账号重复以上步骤，分别获取不同的 Cookie 字符串。
+
+### 设置到 GitHub Secrets（推荐方式：使用单个变量 GLADOS）
+
+1. 打开你的 GitHub 仓库 → **Settings** → **Secrets and variables** → **Actions**
+2. 点击 **New repository secret**
+3. **名称**填：`GLADOS`（必须全大写）
+4. **值**填入所有账号的 Cookie，用**换行**分隔（最清晰）：
+   **多账号示例**：
+```txt
+koa:sess=账号1; koa:sess.sig=账号1;
+koa:sess=账号2; koa:sess.sig=账号2;
+koa:sess=账号3; koa:sess.sig=账号3;
+```
+
 
 ---
 
