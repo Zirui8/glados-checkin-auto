@@ -2,13 +2,11 @@
 
 GLaDOS（glados.cloud / glados.rocks / glados.network）每日自动签到脚本，使用 GitHub Actions 实现。
 
-**当前版本特点**：
+**当前版本特点**(2026.2.4)：
 - 支持**多个账号**同时签到
-- 重复签到（"Checkin Repeats! Please Try Tomorrow"）视为正常，不触发失败邮件
-- 只有真正失败（Cookie 失效、token 错误、网络问题等）才会让 Actions 失败并发送邮件提醒
-- 使用完整的 Cookie 字符串（推荐方式），无需拆分成多个变量
+- 失败会让 Actions 失败并发送绑定GitHub账号的邮箱提醒，重复签到视为正常，不触发失败邮件
 
-**参考项目**：本仓库参考/部分 fork 自 [actions-integration/checkin](https://github.com/actions-integration/checkin)，这是一个经典的 GLaDOS 自动签到模板，支持多账号、通知配置、cron 定时。原项目使用 Node.js 脚本（main.js），本仓库改为纯 Python 实现。
+**参考项目**：本仓库参考/部分 fork 自 [actions-integration/checkin](https://github.com/actions-integration/checkin)，本仓库改为纯 Python 实现。
 
 ## 使用说明
 
@@ -31,8 +29,8 @@ GLaDOS 签到脚本使用 **Cookie** 进行登录。Cookie 和 网址Api 可能�
 
 1. 打开你的 GitHub 仓库 → **Settings** → **Secrets and variables** → **Actions**
 2. 点击 **New repository secret**
-3. **Name(名称)**填：`GLADOS`（必须全大写）
-4. **Secret(密钥)**填入所有账号的 Cookie，用**换行**分隔：
+3. **Name**(名称)填：`GLADOS`（必须全大写）
+4. **Secret**(密钥)填入所有账号的 Cookie，用换行分隔：
 5. **多账号示例**：
 
 ```txt
@@ -48,7 +46,7 @@ koa:sess=账号3; koa:sess.sig=账号3;
 1. 打开仓库首页 → 点击 **Actions** 标签页  
 2. 在左侧选择 `GLaDOS Checkin` workflow（第一次可以运行检测，显示“✅”表示成功）
 3. 点击最新一次运行记录（按日期排序）  
-4. 点击 **Run checkin script** 步骤，可以查看脚本的完整输出日志  
+4. 点击 **Run checkin script** 步骤，可以查看所有账号的输出日志  
    - 如果签到成功，会显示类似 `Checkin! Got X Points` 的提示  
    - 如果返回 `"Checkin Repeats! Please Try Tomorrow"` 表示今天已经签过到  
    - 如果是 Cookie 过期或其他错误，会有对应的报错信息，并会发送报错信息至绑定GitHub账号的邮箱
